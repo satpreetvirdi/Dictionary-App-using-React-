@@ -9,14 +9,17 @@ const Definations = ({ words, meanings, category }) => {
       ) : (
         meanings.map((mean) =>
           mean.meanings.map((def) =>
-            def.definations.map((items) => (
-              <div className="singleMean"
-              style={{backgroundColor: "white" , color: "white"}}
+      
+              def.definitions.map((items) => (
+            
+              
+               <div
+                className="singleMean"
+                style={{ backgroundColor: "white", color: "black" }}
               >
-                
-                <b>{items.defination} </b>
-              </div>
-            ))
+                <b>{items.definition} </b>
+              </div>  
+            ))  
           )
         )
       )}
