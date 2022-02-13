@@ -12,6 +12,10 @@ const Header = ({ setCategory, category, words , setWords }) => {
       mode: "dark",
     },
   });
+    const handelChange = (language) =>{
+        setCategory(language);
+        setWords("");
+    }
 
   return (
     <div className="header">
@@ -32,11 +36,11 @@ const Header = ({ setCategory, category, words , setWords }) => {
             select
             className="select"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => handelChange(e.target.value)}
             label="Select language"
           >
             {categories.map((options) => (
-              <MenuItem key={options.label} value={options.value}>
+              <MenuItem key={options.value} value={options.label}>
                 {options.value}
               </MenuItem>
             ))}

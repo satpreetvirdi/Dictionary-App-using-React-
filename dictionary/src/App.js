@@ -3,25 +3,29 @@ import "./App.css";
 import axios from "axios";
 import { Container } from "@mui/material";
 import Header from "./components/Header/Header";
+import Definations from "./components/Definations/Definations";
 
 function App() {
   const [words, setWords] = useState("");
   const [meanings, setMeanings] = useState([]);
-  const [category, setCategory] = useState("English")
+  const [category, setCategory] = useState("en")
+ 
+  
+  
   const dictionaryApp = async () => {
     try {
       const data = await axios.get(
-        "https://api.dictionaryapi.dev/api/v2/entries/en/Programming"
+        `https://api.dictionaryapi.dev/api/v2/entries/${category}/${words}`
       );
       setMeanings(data.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
-  console.log(meanings);
+  // console.log(meanings);
   useEffect(() => {
     dictionaryApp();
-  }, []);
+  }, [words , category]);
 
   return (
     <div
@@ -33,6 +37,7 @@ function App() {
         style={{ display: "flex", flexDirection: "column", height: "100vh" }}
       >
         <Header category={category} setCategory={setCategory} words={words} setWords={setWords} />
+        {meanings && (<Definations words={words} meanings={meanings} category={category}/>)}
       </Container>
     </div>
   );
