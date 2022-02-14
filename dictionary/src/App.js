@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
-import { Container } from "@mui/material";
+import { Container, Switch } from "@mui/material";
 import Header from "./components/Header/Header";
 import Definations from "./components/Definations/Definations";
+// import { styled } from "@mui/system";
 
 function App() {
   const [words, setWords] = useState("");
   const [meanings, setMeanings] = useState([]);
-  const [category, setCategory] = useState("en")
- 
+  const [category, setCategory] = useState("en");
+  // const [light, setLight] = useState(false)
+
   
-  
+
   const dictionaryApp = async () => {
     try {
       const data = await axios.get(
@@ -25,7 +27,7 @@ function App() {
   // console.log(meanings);
   useEffect(() => {
     dictionaryApp();
-  }, [words , category]);
+  }, [words, category]);
 
   return (
     <div
@@ -34,10 +36,21 @@ function App() {
     >
       <Container
         maxWidth="md"
-        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+        style={{ display: "flex", flexDirection: "column", height: "100vh", justifyContent: "space-evenly" }}
       >
-        <Header category={category} setCategory={setCategory} words={words} setWords={setWords} />
-        {meanings && (<Definations words={words} meanings={meanings} category={category}/>)}
+       {/* <div style={{position: "absolute" , top: 0 , right: 15 ,paddingTop: 10}}>
+      <spam>{light ? "Dark" : "Light"} Mode</spam>
+        <MaterialUISwitch checked={light} onChange={()=>(!light)}/>
+      </div>  */}
+        <Header
+          category={category}
+          setCategory={setCategory}
+          words={words}
+          setWords={setWords}
+        />
+        {meanings && (
+          <Definations words={words} meanings={meanings} category={category} />
+        )}
       </Container>
     </div>
   );
